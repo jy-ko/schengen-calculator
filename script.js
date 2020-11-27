@@ -4,7 +4,7 @@ function createTrip(trip) {
     const tripElMarkup = `
         <label for="${trip.country}-${trip.startDate}">
         </label>
-        <span>${trip.country}, ${trip.startDate.toDateString()}-${trip.endDate.toDateString()}, ${trip.days}Days</span>
+        <span>${trip.country}, ${trip.startDate.toDateString()}-${trip.endDate.toDateString()},${trip.days}Days</span>
       </div>
       <button class="remove-trip">
         ❌
@@ -24,9 +24,13 @@ function removeTrip(tripId) {
 const tripForm = document.querySelector(".trip-form");
     let trips = [];
 
-//  const calculateTotalDays = (trips) => {
-//      trips 
-//  }
+ const calculateTotalDays = (trips) => {
+  sum = 0;
+  for (trip of trips) {
+    sum += trip.days 
+  }
+  return sum;
+ }
  
 tripForm.addEventListener("submit", function(e) {
   e.preventDefault();
@@ -36,13 +40,13 @@ tripForm.addEventListener("submit", function(e) {
   const inputEndDate = new Date(document.getElementById("endDate").value);
 
   const calculateDays = () => {
-      const timeDiff = inputStartDate.getTime() - inputEndDate.getTime();
+      const timeDiff = inputEndDate.getTime()-inputStartDate.getTime() ;
       const daysDiff = timeDiff / (1000 * 3600 * 24); 
       return daysDiff;
   }
 
   const valueCheck = () => {
-      if (inputStartDate != "" && inputEndDate !="" && inputCountry !="") {
+      if (inputStartDate !="" && inputEndDate !="" && inputCountry !="") {
           return true;
       } else {
           alert ('please enter all values')
@@ -72,7 +76,7 @@ tripForm.addEventListener("submit", function(e) {
     trips.push(trip);
     localStorage.setItem("trips", JSON.stringify(trips));
     createTrip(trip);
-    // calculateTotalDays(trips);
+    calculateTotalDays(trips);
     tripForm.reset();
   }
 }); 
