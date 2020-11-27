@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schengen Calculator</title>
+    <link href="styles.css" rel="stylesheet">
+    <script src="script.js" defer></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=11" />
+</head>
+<body>
+    <div class="main">
+        <div class="container">
+            <div class="items-left">
+                <h1>Schengen Trip Planner 🗓 </h1>
+                <div class="base-date">
+                    <p>Enter a date to see how many days you will have by then</p>
+                    <input type="date" id="baseDate" name="baseDate"><br>
+                </div>
+                <p>Your 180 days Period</p>
+                <div class="trip-list-form">
+                    <form class="trip-form">
+                            <div class="form-item">
+                                <label for="country">Destination(Choose from list):</label><br>
+                                <select id="country" name="country">
+                                    <option value="Austria">Austria</option>
+                                    <option value="Belgium">Belgium</option>
+                                    <option value="CzechRepublic">Czech Republic</option>
+                                    <option value="Denmark">Denmark</option>
+                                    <option value="Estonia">Estonia</option>
+                                    <option value="Finland">Finland</option>
+                                    <option value="France">Germany</option>
+                                    <option value="Greece">Greece</option>
+                                    <option value="Hungary">Hungary</option>
+                                    <option value="Iceland">Iceland</option>
+                                    <option value="Italy">Italy</option>
+                                    <option value="Latvia">Latvia</option>
+                                    <option value="Liechtenstein">Liechtenstein</option>
+                                    <option value="Lithuania">Lithuania</option>
+                                    <option value="Luxembourg">Luxembourg</option>
+                                    <option value="Malta">Malta</option>
+                                    <option value="Netherlands">Netherlands</option>
+                                    <option value="Norway">Norway</option>
+                                    <option value="Poland">Poland</option>
+                                    <option value="Portugal">Portugal</option>
+                                    <option value="Slovakia">Slovakia</option>
+                                    <option value="Slovenia">Slovenia</option>
+                                    <option value="Spain">Spain</option>
+                                    <option value="Sweden">Sweden</option>
+                                    <option value="Switzerland">Switzerland</option>
+                                </select>
+                            </div>
+                        <div class="form-item">
+                            <label for="startdate">Start:</label><br>
+                            <input type="date" id="startDate" name="startDate"><br>
+                        </div>
+                        <div class="form-item">
+                            <label for="enddate">End:</label><br>
+                            <input type="date" id="endDate" name="endDate">
+                        </div>
+                        <button type="submit" value="Submit"class="form-item">Add Trip</button>
+                    </form>
+                    <ul class="trip-list">
+                    </ul>
+                </div>
+                <p>When can I travel to schengen next?</p>
+            </div>
+            <div class="items-right">
+                <div class="results">
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
