@@ -20,17 +20,42 @@ function removeTrip(tripId) {
     document.getElementById(tripId).remove();
 }
 
-
 const tripForm = document.querySelector(".trip-form");
     let trips = [];
 
- const calculateTotalDays = (trips) => {
-  sum = 0;
+const calculateDays = (a, b) => {
+  const timeDiff = a.getTime()-b.getTime() ;
+  const daysDiff = timeDiff / (1000 * 3600 * 24); 
+  return daysDiff;
+}
+
+const displayTotalDays = (trips) => {
+  const baseDate = new Date(document.getElementById("baseDate").value);
+  newTrips = [];
+  //check for effective trips
   for (trip of trips) {
-    sum += trip.days 
+    if (calculateDays(baseDate, trip.startDate) >= 180 && 
+    calculateDays(baseDate, trip.endDate)  >= 180) {
+    } else {
+      newTrips.push(trip);
+    }
   }
-  return sum;
- }
+  sum = 0;
+  //add up effective trip days 
+  for (trip of newTrips) {
+    if(calculateDays(baseDate, trip.startDate) >= 180 ) {
+      const daysEffective = 180 - (calculateDays(baseDate, trip.endDate));
+      sum += daysEffective
+    } else {
+      sum += trip.days
+    }
+  }
+  //first trip
+  // const firstTrip = newTrips.sort((a, b) => a.startDate - b.startDate)[0];
+  //available days 
+  // const availableDays = baseDate - firstTrip.startDate - sum;
+  document.getElementById("usedDays").innerHTML = sum;
+}
  
 tripForm.addEventListener("submit", function(e) {
   e.preventDefault();
@@ -38,12 +63,6 @@ tripForm.addEventListener("submit", function(e) {
   const inputCountry = document.getElementById("country").value;
   const inputStartDate = new Date(document.getElementById("startDate").value);
   const inputEndDate = new Date(document.getElementById("endDate").value);
-
-  const calculateDays = () => {
-      const timeDiff = inputEndDate.getTime()-inputStartDate.getTime() ;
-      const daysDiff = timeDiff / (1000 * 3600 * 24); 
-      return daysDiff;
-  }
 
   const valueCheck = () => {
       if (inputStartDate !="" && inputEndDate !="" && inputCountry !="") {
@@ -63,24 +82,22 @@ tripForm.addEventListener("submit", function(e) {
       }
   }
 
-   
   if (valueCheck() && timeCheck()){
     const trip = {
       id: new Date().getTime(),
       country: inputCountry, 
       startDate: inputStartDate,
       endDate: inputEndDate,
-      days: calculateDays()
+      days: calculateDays(inputEndDate, inputStartDate)
 
     };
     trips.push(trip);
     localStorage.setItem("trips", JSON.stringify(trips));
     createTrip(trip);
-    calculateTotalDays(trips);
+    displayTotalDays(trips);
     tripForm.reset();
   }
 }); 
-
 
 
 const tripList = document.querySelector(".trip-list");
@@ -92,5 +109,6 @@ const tripList = document.querySelector(".trip-list");
     ) {
       const tripId = e.target.closest("li").id;
       removeTrip(tripId);
+      displayTotalDays(trips);
     }
 });

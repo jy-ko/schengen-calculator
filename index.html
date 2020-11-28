@@ -13,11 +13,8 @@
         <div class="container">
             <div class="items-left">
                 <h1>Schengen Trip Planner 🗓 </h1>
-                <div class="base-date">
-                    <p>Enter a date to see how many days you will have by then</p>
-                    <input type="date" id="baseDate" name="baseDate"><br>
-                </div>
-                <p>Your 180 days Period</p>
+
+                <p>Check your available days</p>
                 <div class="trip-list-form">
                     <form class="trip-form">
                             <div class="form-item">
@@ -60,10 +57,21 @@
                         </div>
                         <button type="submit" value="Submit"class="form-item">Add Trip</button>
                     </form>
-                    <ul class="trip-list">
-                    </ul>
+                    <div class="base-date">
+                        <span>Enter a date to see how many days you will have by then</span>
+                        <input type="date" id="baseDate" name="baseDate"><br>
+                    </div>
+                    <div>
+                        <div>
+                            Your stay in Schengen Area within the last 180-day period:
+                            <span id="usedDays" value="0"></span>days
+                        </div>
+                        <ul class="trip-list">
+                        </ul>
+                    </div>  
                 </div>
                 <p>When can I travel to schengen next?</p>
+
             </div>
             <div class="items-right">
                 <div class="results">

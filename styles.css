@@ -39,6 +39,11 @@ h1 {
 
 ul {
     padding-left: 0;
+    list-style: none;
+}
+
+.trip-form {
+    margin-right: 20px;
 }
 
 .form-item {
