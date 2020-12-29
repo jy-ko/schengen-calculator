@@ -11,15 +11,13 @@
 <body>
     <div class="main">
         <div class="container">
-            <div class="items-left">
-                <h1>Schengen Trip Planner 🗓 </h1>
-
-                <p>Check your available days</p>
-                <div class="trip-list-form">
-                    <form class="trip-form">
+                <div class="trip-form-main">
+                    <h1>Schengen Trip Planner 🗓 </h1>
+                        <form class="trip-form">
                             <div class="form-item">
                                 <label for="country">Destination(Choose from list):</label><br>
                                 <select id="country" name="country">
+                                    <option disabled selected value> -- select an option -- </option>
                                     <option value="Austria">Austria</option>
                                     <option value="Belgium">Belgium</option>
                                     <option value="CzechRepublic">Czech Republic</option>
@@ -47,31 +45,34 @@
                                     <option value="Switzerland">Switzerland</option>
                                 </select>
                             </div>
-                        <div class="form-item">
-                            <label for="startdate">Start:</label><br>
-                            <input type="date" id="startDate" name="startDate"><br>
-                        </div>
-                        <div class="form-item">
-                            <label for="enddate">End:</label><br>
-                            <input type="date" id="endDate" name="endDate">
-                        </div>
+                            <div class="date-selectors">
+                                <div class="form-item">
+                                    <label for="startdate">Start:</label><br>
+                                    <input type="date" id="startDate" name="startDate"><br>
+                                </div>
+                                <div class="form-item">
+                                    <label for="enddate">End:</label><br>
+                                    <input type="date" id="endDate" name="endDate">
+                                </div>
+                            </div>
+                            <div class="form-item">
+                                <div class="base-date">
+                                    <label for="basedate">X Day (Default: Today):</label><br>
+                                    <input type="date" id="baseDate" name="baseDate"><br>
+                                </div>
+                            </div>
                         <button type="submit" value="Submit"class="form-item">Add Trip</button>
                     </form>
-                    <div class="base-date">
-                        <span>Enter a date to see how many days you will have by then</span>
-                        <input type="date" id="baseDate" name="baseDate"><br>
-                    </div>
-                    <div>
-                        <div>
-                            Your stay in Schengen Area within the last 180-day period:
-                            <span id="usedDays" value="0"></span>days
-                        </div>
+                <div>
+                    <div class="mt-3">
                         <ul class="trip-list">
                         </ul>
-                    </div>  
-                </div>
-                <p>When can I travel to schengen next?</p>
-
+                        Your stay in the Schengen Zone within the last 180-day period:
+                        <span id="usedDays" value="0"></span>days
+                        
+                    </div>
+                    
+                </div>  
             </div>
             <div class="items-right">
                 <div class="results">

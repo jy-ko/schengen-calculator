@@ -50,10 +50,6 @@ const displayTotalDays = (trips) => {
       sum += trip.days
     }
   }
-  //first trip
-  // const firstTrip = newTrips.sort((a, b) => a.startDate - b.startDate)[0];
-  //available days 
-  // const availableDays = baseDate - firstTrip.startDate - sum;
   document.getElementById("usedDays").innerHTML = sum;
 }
  
@@ -63,9 +59,10 @@ tripForm.addEventListener("submit", function(e) {
   const inputCountry = document.getElementById("country").value;
   const inputStartDate = new Date(document.getElementById("startDate").value);
   const inputEndDate = new Date(document.getElementById("endDate").value);
+  console.log(document.getElementById("baseDate").value)
 
   const valueCheck = () => {
-      if (inputStartDate !="" && inputEndDate !="" && inputCountry !="") {
+      if (isNaN(inputStartDate) == false && isNaN(inputEndDate) == false && inputCountry !="") {
           return true;
       } else {
           alert ('please enter all values')
@@ -75,7 +72,7 @@ tripForm.addEventListener("submit", function(e) {
   
   const timeCheck = () => {
       if (inputStartDate > inputEndDate ) {
-          alert('your start Date is after your end date!');
+          alert('your start date is after your end date!');
           return false;
       } else {
           return true;
