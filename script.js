@@ -4,14 +4,13 @@ function createTrip(trip) {
     const tripElMarkup = `
         <label for="${trip.country}-${trip.startDate}">
         </label>
-        <span>${trip.country}, ${trip.startDate.toDateString()}-${trip.endDate.toDateString()},${trip.days}Days</span>
+        <span>${trip.country}, ${trip.startDate.toDateString()}-${trip.endDate.toDateString()}, <strong>${trip.days}</strong> days</span>
       </div>
-      <button class="remove-trip">
-        ❌
-      </button>
+      <a class="remove-trip">&times;</a>
     `;
     tripEl.innerHTML = tripElMarkup;
     tripList.appendChild(tripEl);
+    
   }
 
 function removeTrip(tripId) {
@@ -30,48 +29,16 @@ const calculateDays = (a, b) => {
 }
 
 const displayTotalDays = (trips) => {
-  //get basedate. default today if not selected.
-  let baseDate;
-  if (document.getElementById("baseDate").value) {
-    baseDate = new Date(document.getElementById("baseDate").value)
-  } else {
-    baseDate = new Date();
-  };
-  // get dayOne by subtracting 180 days from basedate
-  let dayOne = baseDate;
-  dayOne.setDate(baseDate.getDate() - 180);
-  console.log(dayOne);
-
-  newTrips = [];
-  //check for effective days and calculate sum
-  // for (trip of trips) {
-  //   if (calculateDays(baseDate, trip.startDate) <= 180 && 
-  //   trip.days <= 180) {
-  //     newTrips.push(trip);
-  //   } else if ( )
-      
-  //   }
-  // }
+  //calculate the last day of the entire 180 day period
+  lastDate = trips[trips.length-1].endDate;
+  console.log(lastDate);
+  //calculate the total number of days by summing each trip days.
   sum = 0;
-  //add up effective trip days 
-  // for (trip of newTrips) {
-  //   if(calculateDays(baseDate, trip.startDate) >= 180 ) {
-  //     const daysEffective = 180 - (calculateDays(baseDate, trip.endDate));
-  //     sum += daysEffective
-  //   } else {
-  //     sum += trip.days
-  //   }
-  // }
+  trips.forEach(trip => sum += trip.days );
   document.getElementById("usedDays").innerHTML = sum;
 }
 
-
-//if from the list, there is a trip with an end date before dayone , ignore
-// if from the list there is a trip with a start date before the dayone but end date after dayone, 
-//     subtract the days between end date and day one and add to sum
-// remove repeated days
-
-//Hit Submit to add a new trip. 
+//on form submission
 tripForm.addEventListener("submit", function(e) {
   e.preventDefault();
 
@@ -90,7 +57,7 @@ tripForm.addEventListener("submit", function(e) {
   
   const timeCheck = () => {
       if (inputStartDate > inputEndDate ) {
-          alert('Your Start Date is after your End Date!');
+          alert('Your End Date is before your start date!');
           return false;
       } else {
           return true;
