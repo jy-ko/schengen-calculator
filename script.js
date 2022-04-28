@@ -28,10 +28,15 @@ const calculateDays = (a, b) => {
   return daysDiff;
 }
 
+// duplicate days
+// const calculateDuplicate = (trips) => {
+//   trips.forEach(trip => if (trips[trips.length-1].startDate) )
+//   if ( trips[trips.length-1].startDate < )
+// }
+
 const displayTotalDays = (trips) => {
   //calculate the last day of the entire 180 day period
   lastDate = trips[trips.length-1].endDate;
-  console.log(lastDate);
   //calculate the total number of days by summing each trip days.
   sum = 0;
   trips.forEach(trip => sum += trip.days );
@@ -61,9 +66,17 @@ tripForm.addEventListener("submit", function(e) {
           return false;
       } else {
           return true;
+          
       }
   }
 
+  // const chronologyCheck = () => {
+  //   if (inputEndDate < trips[trips.length-1].endDate ) {
+  //     alert("please fill your trip in chronological order")
+  //   } else {
+  //     return true;
+  //   }
+  // }
   if (valueCheck() && timeCheck()){
     const trip = {
       id: new Date().getTime(),
@@ -74,10 +87,37 @@ tripForm.addEventListener("submit", function(e) {
 
     };
     trips.push(trip);
-    localStorage.setItem("trips", JSON.stringify(trips));
-    createTrip(trip);
-    displayTotalDays(trips);
-    tripForm.reset();
+    //check for chronological order 
+    //check for duplicate days
+    if (trips.length > 1 && (trip.startDate < trips[trips.length-2].startDate)) {
+      alert("please enter the trips in a chrological order!");
+      trips.pop();
+    } else if (trips.length > 1 && (trip.startDate <= trips[trips.length-2].endDate)) {
+      alert("you have duplicate days!");
+      trips.pop();
+    } else {
+      console.log(trips, trips[trips.length-1].endDate);
+      localStorage.setItem("trips", JSON.stringify(trips));
+      createTrip(trip);
+      displayTotalDays(trips);
+      tripForm.reset();
+    }
+
+
+    // if (trips.length > 1 && (trip.startDate < trips[trips.length-2].endDate)){
+    //   alert("you have duplicate days!");
+    //   trips.pop();
+    // } else if (trips.length > 1 && (trip.startDate < trips[trips.length-2].startDate)) {
+    //   alert("please enter the trips in a chrological order!");
+    //   trips.pop();
+    // } else {
+    //   console.log(trips, trips[trips.length-1].endDate);
+    //   localStorage.setItem("trips", JSON.stringify(trips));
+    //   createTrip(trip);
+    //   displayTotalDays(trips);
+    //   tripForm.reset();
+    // }
+
   }
 }); 
 
