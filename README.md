@@ -1,8 +1,8 @@
 # Schengen-calculator
 
-How many days can you stay in the schengen zone?
+How many days can you travel in the schengen zone?
 
-As a frequent traveller, I have often used the schengen calculator to make sure that I haven't overstayed in the schengen zone.  
+As a frequent traveller, I often haven to calculate the number of days I am staying in a 180-day period, and make sure I'm not overstaying!
 
 The app is inspired by the official app on schengen zone official website.
 
